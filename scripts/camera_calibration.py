@@ -29,14 +29,14 @@ class CameraCalibration(object):
         # Initialize findChessboardCorners and drawChessboardCorners parameters
         self.patternSize_columns = rospy.get_param("~patternSize_columns", 10)
         self.patternSize_rows = rospy.get_param("~patternSize_rows", 8)
-        self.square_size = rospy.get_param("~square_size", .020)
+        self.square_size = rospy.get_param("~square_size", 0.020)
         
         # Initialize cornerSubPix parameters
         self.winSize_columns = rospy.get_param("~winSize_columns", 5)
         self.winSize_rows = rospy.get_param("~winSize_rows", 5)
         self.criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
     
-        img_names = glob(img_dir + "/image_*.jpg")
+        img_names = glob(self.img_dir + "/image_*.jpg")
     
         pattern_size = (self.patternSize_columns, self.patternSize_rows)
         pattern_points = np.zeros((np.prod(pattern_size), 3), np.float32)
@@ -65,7 +65,7 @@ class CameraCalibration(object):
             if ret == True:
                 corners2 = cv2.cornerSubPix(gray, corners, (self.winSize_columns, self.winSize_rows), (-1, -1), self.criteria)
     
-            if not found:
+            if not ret:
                 print('chessboard not found')
                 continue
     

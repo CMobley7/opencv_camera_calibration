@@ -22,7 +22,6 @@ class RecordImgs(object):
         # A number of parameters to determine what gets displayed on the
         # screen. These can be overridden the appropriate launch file
         self.show_text = rospy.get_param("~show_text", True)
-        self.feature_size = rospy.get_param("~feature_size", 1)
 
         # Initialize a number of global variables
         self.frame = None

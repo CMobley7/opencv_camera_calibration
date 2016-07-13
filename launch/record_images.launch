@@ -1,0 +1,16 @@
+<launch>
+  <node pkg="opencv_camera_calibration" name="record_imgs" type="record_imgs.py" output="screen">
+
+    <remap from="input_rgb_image" to="/usb_cam/image_raw" />
+    <remap from="output_rgb_image" to="/usb_cam/image_processed" />
+
+    <rosparam>
+       show_text: True
+       patternSize_columns: 10
+       patternSize_rows: 8
+       winSize_columns: 5
+       winSize_rows: 5
+    </rosparam>
+
+  </node>
+</launch>
