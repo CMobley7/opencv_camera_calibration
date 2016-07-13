@@ -28,6 +28,7 @@ class RecordImgs(object):
         self.frame_size = None
         self.frame_width = None
         self.frame_height = None
+        self.flip_image = False
         self.mask = None
         self.marker_image = None
         self.display_image = None
@@ -40,7 +41,7 @@ class RecordImgs(object):
         self.image_count = 0
 
         # Initialize output folder path to current terminal directory
-        self.output_folder = os.path.dirname(os.path.realpath('__file__'))
+        self.output_folder = os.path.dirname(os.path.realpath('__file__'))[:-8] + "/include/opencv_camera_calibration/camera_cal_data"
 
         # Initialize findChessboardCorners and drawChessboardCorners parameters
         self.patternSize_columns = rospy.get_param("~patternSize_columns", 10)
@@ -103,7 +104,7 @@ class RecordImgs(object):
         self.display_image = cv2.bitwise_or(self.processed_image, self.marker_image)
 
         # Handle keyboard events
-        self.keystroke = cv.WaitKey(500)
+        self.keystroke = cv.WaitKey(250)
 
         # Compute the time for this loop and estimate CPS as a running average
         end = rospy.get_time()
@@ -134,7 +135,7 @@ class RecordImgs(object):
 
 
         # Process any keyboard commands
-        self.keystroke = cv2.waitKey(500)
+        self.keystroke = cv2.waitKey(250)
         if self.keystroke != -1:
             try:
                 cc = chr(self.keystroke & 255).lower()
@@ -165,14 +166,17 @@ class RecordImgs(object):
 
             # If found, refine and draw the corners
             if ret == True:
-
+                print "171"
                 # Refine corners
                 corners2 = cv2.cornerSubPix(gray, corners, (self.winSize_columns, self.winSize_rows), (-1,-1), self.criteria)
+                print "174"
 
                 # Draw the corners
                 cv2.drawChessboardCorners(self.marker_image, (self.patternSize_columns,self.patternSize_rows), corners2, ret)
+                print "178"
         except:
             pass
+            print "181"
 
         return cv_image
 

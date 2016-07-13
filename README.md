@@ -48,8 +48,7 @@ Checkboard Patterns are available at OpenCV:
 
 0. Change `record_images.launch` and `camera_calibration.launch` files to match the topic of the camera and parameters of the checkerboard choosen
 1. If you haven't already, start the camera
-2. create a directory for your calibration data files, for example: `mkdir ~/camera_cal_data; cd ~/camera_cal_data`
-3. Record images for the camera: `roslaunch opencv_camera_calibration record_imgs.launch`
-4. Calibrate the intrinsics and extrinsics parameters: `roslaunch opencv_camera_calibration camera_calibration.launch`
-5. Copy the data into the choosen camera .yaml file
-6. Restart the camera
+2. Record images for the camera: `roslaunch opencv_camera_calibration record_imgs.launch`
+3. Calibrate the intrinsics and extrinsics parameters: `roslaunch opencv_camera_calibration camera_calibration.launch`
+4. Copy the data into the chosen camera .yaml file
+5. Restart the camera

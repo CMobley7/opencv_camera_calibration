@@ -24,7 +24,7 @@ class CameraCalibration(object):
         rospy.on_shutdown(self.cleanup)
         
         # Initialize output folder path to current terminal directory
-        self.img_dir = os.path.dirname(os.path.realpath('__file__'))
+        self.img_dir = os.path.dirname(os.path.realpath('__file__'))[:-8] + "/include/opencv_camera_calibration/camera_cal_data"
 
         # Initialize findChessboardCorners and drawChessboardCorners parameters
         self.patternSize_columns = rospy.get_param("~patternSize_columns", 10)

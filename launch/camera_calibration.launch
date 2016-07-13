@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="opencv_camera_calibration" name="camera_calibration" type="camera_calibration.py" output="screen">
+  <node pkg="opencv_camera_calibration" name="camera_calibration" type="camera_calibration.py" output="screen" cwd="node">
 
     <remap from="input_rgb_image" to="/usb_cam/image_raw" />
 
