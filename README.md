@@ -4,7 +4,7 @@
 
 - [Chris Mobley](https://ai.uni-bremen.de/team/thiemo_wiedemeyer) <<cmobley7@vt.edu>>, [Computational Multiphysics Systems Laboratory](http://www.me.vt.edu/cms/), Virginia Tech
 
-*Note:* ***Please use the GitHub issues*** *for questions and problems regarding the iai_kinect2 package and its components.* ***Do not write emails.***
+*Note:* ***Please use the GitHub issues*** *for questions and problems regarding the opencv_camera_calibration package and its components.* ***Do not write emails.***
 
 ## Description
 
@@ -23,6 +23,7 @@ Windows:
 - `ESC`, `q`: Quit
 - `SPACE`, `s`: Save the current image for calibration
 - `t`: Toggle text on screen
+
 Terminal:
 - `CRTL`+`c`: Quit
 
@@ -51,4 +52,4 @@ Checkboard Patterns are available at OpenCV:
 3. Record images for the camera: `roslaunch opencv_camera_calibration record_imgs.launch`
 4. Calibrate the intrinsics and extrinsics parameters: `roslaunch opencv_camera_calibration camera_calibration.launch`
 5. Copy the data into the choosen camera .yaml file
-6. Restart the camera and be amazed at the better data.
+6. Restart the camera
