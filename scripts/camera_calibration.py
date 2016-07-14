@@ -41,14 +41,16 @@ class CameraCalibration(object):
         pattern_size = (self.patternSize_columns, self.patternSize_rows)
         pattern_points = np.zeros((np.prod(pattern_size), 3), np.float32)
         pattern_points[:, :2] = np.indices(pattern_size).T.reshape(-1, 2)
-        pattern_points *= square_size
+        pattern_points *= self.square_size
     
         obj_points = []
         img_points = []
+        i = 0
  
         for fname in img_names:
 
-            print('processing %s... ' % fname, end='')
+            print("processing " + img_names[i])
+            i += 1
             
             img = cv2.imread(fname, 0)
             
@@ -77,7 +79,7 @@ class CameraCalibration(object):
         # calculate camera distortion
         rms, camera_matrix, dist_coefs, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, gray.shape[::-1], None, None)
         
-        mean_error = 0
+        tot_error = 0
         
         for i in xrange(len(obj_points)):
             img_points2, _ = cv2.projectPoints(obj_points[i], rvecs[i], tvecs[i], camera_matrix, dist_coefs)
@@ -88,7 +90,7 @@ class CameraCalibration(object):
         output_file.write("\nRMS:", rms)
         output_file.write("camera matrix:\n", camera_matrix)
         output_file.write("distortion coefficients: ", dist_coefs.ravel())
-        output_file.write("total error: ", mean_error/len(objpoints))
+        output_file.write("mean error: ", tot_error/len(obj_points))
 
     def cleanup(self):
         print "Shutting down vision node."
